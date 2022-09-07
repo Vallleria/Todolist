@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TaskType, Todolist } from './Todolist';
 
 // function App() {
@@ -40,12 +40,26 @@ import { TaskType, Todolist } from './Todolist';
 // };
 function App() {
 
-    let tasks = [
+    let initTasks = [
         {id : 1, title : "CSS", isDone: true},
         {id : 2, title : "JS", isDone: true},
         {id : 3, title : "React", isDone: false}
 
         ]
+
+
+        let arr = useState(initTasks)
+        
+        let tasks = arr[0];
+        let setTasks = arr[1];
+
+
+
+        function removeTask(id: number) {
+            debugger
+           let filterTasks = tasks.filter( t => t.id !== id)
+           setTasks(filterTasks)
+        }
 
         // let tasks2: Array<TaskType>= [
         //     {id : 1, title : "A", isDone: true},
@@ -56,7 +70,9 @@ function App() {
 
             return (
             <div className='App'>
-                <Todolist title="what" tasks={tasks} />
+                <Todolist title="what" 
+                tasks={tasks}
+                removeTask={removeTask} />
                 {/* <Todolist title="movies" tasks={tasks2} /> */}
             </div>
             )
